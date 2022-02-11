@@ -26,11 +26,12 @@ print("")
 #A. Mining income 
 mining_addresses = {"ban_3fo1d1ng6mfqumfoojqby13nahaugqbe5n6n3trof4q8kg5amo9mribg4muo":"folding@home","ban_1boompow14irck1yauquqypt7afqrh8b6bbu5r93pc6hgbqs7z6o99frcuym":"bpow","ban_1nice4sy9fgcb8qxbx7nkj9ajc79aapqnayrfk4gow184mgnfm49ncstg36w":"nicebanano"}
 #B. Airdrops/faucets
-faucet_addresses = {"ban_1faucetjuiyuwnz94j4c7s393r95sk5ac7p5usthmxct816osgqh3qd1caet":"reddit_faucet","ban_1jung1eb3uomk1gsx7w6w7toqrikxm5pgn5wbsg5fpy96ckpdf6wmiuuzpca":"jungletv","ban_3346kkobb11qqpo17imgiybmwrgibr7yi34mwn5j6uywyke8f7fnfp94uyps":"prussia","ban_3hotwkr9xuk8c9eixqafn8jf8oxzwagc8rtrgmuf973s5c96hp4g9ix3jw9c":"walker","ban_1s1hot8adygxuj96f35dicnmd47cctazoaiia9uduk731nqt6fuenfax9ckt":"slots","ban_1monkeyt1x77a1rp9bwtthajb8odapbmnzpyt8357ac8a1bcron34i3r9y66":"monkeytalks","ban_1jtpriyhu81qdydugsgtym9drsw5en6m65nh3mnukwjdd6qmbkc9wa3gjhnr":"JTV","ban_1jtprixunfus5mozkzj5gtfm79b54p3pwnje8snh9ugu998cfk13qceepwn5":"JTV","ban_1jtweetz1myhj9xp8g5esgsefb78c6pmj9hge6agf37q1x88euhd71nscss6":"JTV","ban_1jung1eb3uomk1gsx7w6w7toqrikxm5pgn5wbsg5fpy96ckpdf6wmiuuzpca":"JTV"}
+faucet_addresses = {"ban_1faucetjuiyuwnz94j4c7s393r95sk5ac7p5usthmxct816osgqh3qd1caet":"reddit_faucet","ban_1jung1eb3uomk1gsx7w6w7toqrikxm5pgn5wbsg5fpy96ckpdf6wmiuuzpca":"jungletv","ban_3346kkobb11qqpo17imgiybmwrgibr7yi34mwn5j6uywyke8f7fnfp94uyps":"prussia","ban_3hotwkr9xuk8c9eixqafn8jf8oxzwagc8rtrgmuf973s5c96hp4g9ix3jw9c":"walker","ban_1s1hot8adygxuj96f35dicnmd47cctazoaiia9uduk731nqt6fuenfax9ckt":"slots","ban_1monkeyt1x77a1rp9bwtthajb8odapbmnzpyt8357ac8a1bcron34i3r9y66":"monkeytalks","ban_1jtpriyhu81qdydugsgtym9drsw5en6m65nh3mnukwjdd6qmbkc9wa3gjhnr":"JTV","ban_1jtprixunfus5mozkzj5gtfm79b54p3pwnje8snh9ugu998cfk13qceepwn5":"JTV","ban_1jtweetz1myhj9xp8g5esgsefb78c6pmj9hge6agf37q1x88euhd71nscss6":"JTV","ban_1jung1eb3uomk1gsx7w6w7toqrikxm5pgn5wbsg5fpy96ckpdf6wmiuuzpca":"JTV",
+"ban_3grainskdett8tscjapuhig5m8fui5gi6th437sbnpot7mqw7qdmrb9rghfj":"freerice","ban_3freefkgfnazw7ajt1xyqgmijsjb9oc3mykm18pewy11wd7twd5hf4cbxekh":"freerice", "ban_1rp3ke75c8a3t5mkzekibo8w4mxzydrie8xzwqmkajfk9ww76f7wzbhd5bmt":"Getbanano.cc"}
 #C. 
 exchange_addresses = {"ban_1ddaz5y8jk47hkicpi1kc38kg359r74y38gmmq6moiki11gx1g4a9qb4r7c6":"moon_banano_trade","ban_1oaocnrcaystcdtaae6woh381wftyg4k7bespu19m5w18ze699refhyzu6bo":"Kuyumcu"} 
 #D. Other addresses
-other_addr={"ban_3tah3gzcxcn47h4hxowfatgr7ke1rnzrayatow7xhmabzmjnxczezsp81w8i":"tipbot","ban_3imophzbk9ruq3ju18jyw37376h3wdeon15asw4yj3kfgxs6m1eg7784a4im":"tipcc","ban_3po1yhotz68w6mogy6budr7g8y7gw5wjqhbgc5gt549emeoof9npf315xmn4":"poly wban","ban_1wbanktxc5mtnydsjq6doy81wsnn7fw1z7yzw4zzieb6dfkihjtbwzgrxt9i":"wban bsc","ban_1rp3ke75c8a3t5mkzekibo8w4mxzydrie8xzwqmkajfk9ww76f7wzbhd5bmt":"Getbanano.cc"}
+other_addr={"ban_3tah3gzcxcn47h4hxowfatgr7ke1rnzrayatow7xhmabzmjnxczezsp81w8i":"tipbot","ban_3imophzbk9ruq3ju18jyw37376h3wdeon15asw4yj3kfgxs6m1eg7784a4im":"tipcc","ban_3po1yhotz68w6mogy6budr7g8y7gw5wjqhbgc5gt549emeoof9npf315xmn4":"poly wban","ban_1wbanktxc5mtnydsjq6doy81wsnn7fw1z7yzw4zzieb6dfkihjtbwzgrxt9i":"wban bsc"}
 
 
 
@@ -161,7 +162,7 @@ def stagefive():
                         sum_mining[1] += value
                     mining_writer.writerow(row)
 
-                if row[1] in faucet_addresses:
+                elif row[1] in faucet_addresses:
                     row.append(faucet_addresses[row[1]])
                     if row[2] == "receive": 
                         sum_faucet[0] += value
@@ -169,7 +170,7 @@ def stagefive():
                         sum_faucet[1] += value
                     faucet_writer.writerow(row)
 
-                if row[1] in exchange_addresses:
+                elif row[1] in exchange_addresses:
                     row.append(exchange_addresses[row[1]])
                     if row[2] == "receive": 
                         sum_exchange[0] += value
@@ -219,4 +220,4 @@ if start <= 4:
     stagefour()
 if start <= 5:
     stagefive()
-
+print("Script run completed succesfully")
