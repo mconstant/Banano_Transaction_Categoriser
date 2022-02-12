@@ -31,7 +31,7 @@ faucet_addresses = {"ban_1faucetjuiyuwnz94j4c7s393r95sk5ac7p5usthmxct816osgqh3qd
 #C. 
 exchange_addresses = {"ban_1ddaz5y8jk47hkicpi1kc38kg359r74y38gmmq6moiki11gx1g4a9qb4r7c6":"moon_banano_trade","ban_1oaocnrcaystcdtaae6woh381wftyg4k7bespu19m5w18ze699refhyzu6bo":"Kuyumcu"} 
 #D. Other addresses
-other_addr={"ban_3tah3gzcxcn47h4hxowfatgr7ke1rnzrayatow7xhmabzmjnxczezsp81w8i":"tipbot","ban_3imophzbk9ruq3ju18jyw37376h3wdeon15asw4yj3kfgxs6m1eg7784a4im":"tipcc","ban_3po1yhotz68w6mogy6budr7g8y7gw5wjqhbgc5gt549emeoof9npf315xmn4":"poly wban","ban_1wbanktxc5mtnydsjq6doy81wsnn7fw1z7yzw4zzieb6dfkihjtbwzgrxt9i":"wban bsc"}
+other_addr={"ban_3imophzbk9ruq3ju18jyw37376h3wdeon15asw4yj3kfgxs6m1eg7784a4im":"tipcc","ban_3po1yhotz68w6mogy6budr7g8y7gw5wjqhbgc5gt549emeoof9npf315xmn4":"poly wban","ban_1wbanktxc5mtnydsjq6doy81wsnn7fw1z7yzw4zzieb6dfkihjtbwzgrxt9i":"wban bsc"}
 
 
 
@@ -97,8 +97,17 @@ def stagethree():
                 else:
                     if row[2] != "change": 
                         timestamp = row[9]
-                        data = cg.get_coin_market_chart_range_by_id(id='banano',vs_currency=desired_currency,from_timestamp=timestamp,to_timestamp=int(timestamp)+5000)
-                        price = data['prices'][0][1]            
+                        for i in range(0,5): #retry with growing intervals in case coingecko is being weird.
+                            try:
+                                data = cg.get_coin_market_chart_range_by_id(id='banano',vs_currency=desired_currency,from_timestamp=timestamp,to_timestamp=int(timestamp)+5000*(i+1))
+                                price = data['prices'][0][1]
+                                break   
+                            except IndexError:
+                                print(i) 
+                                print("Query to coingecko failed, retrying")
+                                if i == 4:
+                                    print("Unable to determine price for transaction with hash " + row[0] + ". Please manually fetch this data")
+                                continue
                         row.append(price)
                         row.append(price*float(row[8]))
                         time.sleep(1.25)
