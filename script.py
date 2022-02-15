@@ -15,6 +15,14 @@ print("If you are planning on using this, please verify the correctness of the g
 address = input("Enter the banano address for which you want to generate the report: ") 
 desired_currency = input("Please enter the currency you would like to use: ")
 
+possible_currencies = cg.get_supported_vs_currencies()
+while desired_currency not in possible_currencies:
+	if desired_currency == 'help':
+		print(f"Supported currencies: {', '.join(possible_currencies)}")
+		desired_currency = input("Please enter the currency you would like to use: ")
+	else:
+		desired_currency = input(f"'{desired_currency}' is not a valid currency. Please enter a valid currency or type 'help' to show a list of possible currencies: ")
+
 print("")
 print("By default, the timestamp in the banano transactions, and thus the report will be based on the timestamp of the block when you generated it.")
 print("This means in the case of receive transactions, that there can be a major difference between the actual time the transaction was sent and the time in the block.")
